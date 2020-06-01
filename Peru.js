@@ -30,8 +30,8 @@ var svg = d3.select("svg"),
 // center, translate, and scale the data to project it properly and make it visible
 // Customize the projection to make the center of Peru become the center of the map
 var projection = d3.geoMercator()
-      .center([-80, -8.25])
-      .scale(1500)
+      .center([-80, -10])
+      .scale(1600)
       .translate([width / 2, height / 2]);
     
 // project the data
