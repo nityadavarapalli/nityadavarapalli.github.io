@@ -16,6 +16,9 @@ https://www.citypopulation.de/en/peru/cities/
 
 Color Scheme
 https://github.com/d3/d3-scale-chromatic
+
+California Population
+https://bl.ocks.org/mbostock/5562380
 ----------------------------------------------------------------------*/ 
 /*jslint browser: true*/
 /*global d3*/
