@@ -1,8 +1,10 @@
 /* ---------------------------------------------------------------------
 Nitya Davarapalli
 CSE 163
-peru.js
+Peru.js
+
 Referenced
+Winding Path
 https://stackoverflow.com/questions/54947126/geojson-map-with-d3-only-rendering-a-single-path-in-a-feature-collection
 
 Peru Map Shapefile
@@ -19,6 +21,9 @@ https://github.com/d3/d3-scale-chromatic
 
 California Population
 https://bl.ocks.org/mbostock/5562380
+
+Tooltip
+https://bl.ocks.org/tiffylou/88f58da4599c9b95232f5c89a6321992
 ----------------------------------------------------------------------*/ 
 /*jslint browser: true*/
 /*global d3*/
@@ -40,18 +45,19 @@ var path = d3.geoPath()
 
 // Set up scale that will take in data values as input and return colors. 
 var color = d3.scaleThreshold()
-//    .domain([5, 10, 25, 50, 60, 80, 2000, 4000])
-//    .domain([5, 10, 15, 25, 40, 60, 85, 3000])
     .domain([5, 10, 20, 30, 45, 70, 100, 1000])
     .range(d3.schemeGnBu[9]);
+
+// Define the Tooltip
+var tooltip = d3.select("body").append("div") 
+        .attr("class", "tooltip")       
+        .style("opacity", 0);
 
 
 // Legend
 var x = d3.scaleSqrt()
     .domain([0, 1000])
     .rangeRound([440, 950]);
-//    .domain([0, 4500])
-//    .rangeRound([440, 950]);
 
 // create svg element
 var g = svg.append("g")
@@ -148,15 +154,28 @@ d3.csv("Peru.csv").then(function(data){
 				}
 			}		
         }
-        
        //Bind data and create one path per GeoJSON feature
        svg.append("g")
          .selectAll("path")
          .data(features)
          .enter().append("path")
            .style("fill", function(d) { return color(d.properties.value); })
-           .attr("stroke", "lightgrey")
-           .attr("d", path);
+           .attr("stroke", "grey")
+           .attr("d", path)
+           // Tooltip of the province name 
+           .on("mouseover", function(d) {    
+             tooltip.transition()    
+             .duration(200)    
+             .style("opacity", .9);    
+             tooltip.html(d.properties.NAME_1)  
+             .style("left", (d3.event.pageX) + "px")   
+             .style("top", (d3.event.pageY - 28) + "px");  
+           })          
+           .on("mouseout", function(d) {   
+             tooltip.transition()    
+             .duration(500)    
+             .style("opacity", 0); 
+           });
     });
 });
 

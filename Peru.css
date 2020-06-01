@@ -1,3 +1,23 @@
-p {
-    color: black;
+/*
+Nitya Davarapalli
+CSE 163
+Peru.css
+*/
+
+/*Tooltip*/
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: auto;
+    height: auto;    
+    line-height: 1;
+    padding: 4px;   
+    font-family: "Open Sansa", sans-serif;
+    font-size: 16px; 
+    color: #fff;
+    background: rgba(43,43,43, 0.8); 
+    border: 0px;  
+    border-radius: 4px;
+    pointer-events: none;   
+    
 }
