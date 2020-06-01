@@ -4,6 +4,12 @@ CSE 163
 Peru.css
 */
 
+/*Highlight */
+body path.highlight
+{
+    stroke: #000;
+}
+
 /*Tooltip*/
 div.tooltip { 
     position: absolute;     

@@ -24,6 +24,9 @@ https://bl.ocks.org/mbostock/5562380
 
 Tooltip
 https://bl.ocks.org/tiffylou/88f58da4599c9b95232f5c89a6321992
+
+Highlight
+http://sureshlodha.github.io/CMPS165Examples/RegionalMapping/india/
 ----------------------------------------------------------------------*/ 
 /*jslint browser: true*/
 /*global d3*/
@@ -163,15 +166,21 @@ d3.csv("Peru.csv").then(function(data){
            .attr("stroke", "grey")
            .attr("d", path)
            // Tooltip of the province name 
-           .on("mouseover", function(d) {    
+           .on("mouseover", function(d) { 
+             // Highlight the province during mouseover
+             if(d.properties.NAME_1){
+                d3.select(this).attr("class", "highlight");
              tooltip.transition()    
              .duration(200)    
              .style("opacity", .9);    
              tooltip.html(d.properties.NAME_1)  
              .style("left", (d3.event.pageX) + "px")   
              .style("top", (d3.event.pageY - 28) + "px");  
+             }
            })          
-           .on("mouseout", function(d) {   
+           .on("mouseout", function(d) {  
+             // Take out the higlight
+             d3.select(this).classed("highlight", false);
              tooltip.transition()    
              .duration(500)    
              .style("opacity", 0); 
